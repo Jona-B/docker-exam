@@ -26,8 +26,16 @@ services:
     networks:
       - backend_network
 
+  frontend:
+    build: ./frontend
+    ports:
+      - '4000:4000'
+    networks:
+      - frontend_network
+
 volumes:
   db_data:
 
 networks:
   backend_network:
+  frontend_network:
