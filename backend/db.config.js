@@ -1,7 +1,7 @@
 module.exports = {
-  HOST: "TO_MODIFY",
-  USER: "TO_MODIFY",
-  PASSWORD: "TO_MODIFY",
-  DATABASE: "TO_MODIFY",
-  PORT: "TO_MODIFY",
+  HOST: "database",
+  USER: "jb",
+  PASSWORD: "rootpwd",
+  DATABASE: "testdocker",
+  PORT: "3306",
 };

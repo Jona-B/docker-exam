@@ -20,16 +20,20 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/todos", async (req, res) => {
-  //TO_MODIFY
-  res.send([]) // to remove after question 1)
+  const todos = await db.select("*").from("todos");
+  res.send(todos);
 });
 
 app.post("/todos", async (req, res) => {
-  //TO_MODIFY
+  const { title } = req.body;
+  const [insertedTodo] = await db("todos").insert({ title }).returning("*");
+  res.send(insertedTodo);
 });
 
 app.delete("/todos/:todoId", async (req, res) => {
-  //TO_MODIFY
+  const { todoId } = req.params;
+  await db("todos").where("id", todoId).delete();
+  res.status(204).send();
 });
 
 app.listen(port, () => {

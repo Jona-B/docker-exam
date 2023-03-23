@@ -10,3 +10,24 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+    networks:
+      - backend_network
+
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
+      MYSQL_DATABASE: testdocker
+      MYSQL_USER: jb
+      MYSQL_PASSWORD: rootpwd
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - backend_network
+
+volumes:
+  db_data:
+
+networks:
+  backend_network:
