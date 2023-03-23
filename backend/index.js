@@ -20,20 +20,35 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/todos", async (req, res) => {
-  const todos = await db.select("*").from("todos");
-  res.send(todos);
+  try {
+    const todos = await db.select("*").from("todos");
+    res.send(todos);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    res.sendStatus(500);
+  }
 });
 
 app.post("/todos", async (req, res) => {
-  const { title } = req.body;
-  const [insertedTodo] = await db("todos").insert({ title }).returning("*");
-  res.send(insertedTodo);
+  const { name, description } = req.body;
+  try {
+    const [id] = await db("todos").insert({ name, description });
+    res.send({ id, name, description });
+  } catch (error) {
+    console.error("Error inserting todo:", error);
+    res.sendStatus(500);
+  }
 });
 
 app.delete("/todos/:todoId", async (req, res) => {
   const { todoId } = req.params;
-  await db("todos").where("id", todoId).delete();
-  res.status(204).send();
+  try {
+    await db("todos").where("id", todoId).del();
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error deleting todo:", error);
+    res.sendStatus(500);
+  }
 });
 
 app.listen(port, () => {
