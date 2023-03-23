@@ -15,7 +15,7 @@ const db = require("knex")({
 const cors = require("cors");
 const app = express();
 
-const port = //TO_MODIFY
+const port = process.env.PORT || 4001;
 app.use(express.json());
 app.use(cors());
 

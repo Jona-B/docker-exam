@@ -1,1 +1,12 @@
-#TO_MODIFY
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - '4001:4001'
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
