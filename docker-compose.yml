@@ -10,6 +10,11 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PORT=${DB_PORT}
     networks:
       - backend_network
 
@@ -30,6 +35,8 @@ services:
     build: ./frontend
     ports:
       - '4000:4000'
+    environment:
+      - REACT_APP_BACKEND_HOST=http://backend:4001
     networks:
       - frontend_network
 

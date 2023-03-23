@@ -4,11 +4,16 @@ const config = require("./db.config");
 const db = require("knex")({
   client: "mysql2",
   connection: {
-    host: config.HOST,
-    port: config.PORT,
-    user: config.USER,
-    password: config.PASSWORD,
-    database: config.DATABASE,
+    // host: config.HOST,
+    // port: config.PORT,
+    // user: config.USER,
+    // password: config.PASSWORD,
+    // database: config.DATABASE,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
   },
 });
 
